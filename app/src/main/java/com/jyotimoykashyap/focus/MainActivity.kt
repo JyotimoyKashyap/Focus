@@ -47,12 +47,13 @@ class MainActivity : AppCompatActivity() {
             Log.i("modelinfo" , "Getting into this")
             val currentTime = System.currentTimeMillis()
             val usageStatsManager = this.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-            val usageEvents = usageStatsManager.queryEvents(currentTime - (1000*60*10), currentTime)
+            //val usageEvents = usageStatsManager.queryEvents(currentTime - (1000*60*10), currentTime)
+//            val usageEvents = usageStatsManager.queryAndAggregateUsageStats()
             val usageEvent = UsageEvents.Event()
-            while(usageEvents.hasNextEvent()) {
-                usageEvents.getNextEvent(usageEvent)
-                Log.i("modelinfo" , "${usageEvent.packageName} & ${usageEvent.timeStamp}" )
-            }
+//            while(usageEvents.hasNextEvent()) {
+//                usageEvents.getNextEvent(usageEvent)
+//                Log.i("modelinfo" , "${usageEvent.packageName} & ${usageEvent.timeStamp}" )
+//            }
         } else {
             Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS).apply {
                 startActivity(this)

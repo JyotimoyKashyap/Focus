@@ -2,6 +2,7 @@ package com.jyotimoykashyap.focus
 
 import android.app.AppOpsManager
 import android.app.usage.UsageEvents
+import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.content.Intent
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             //val usageEvents = usageStatsManager.queryEvents(currentTime - (1000*60*10), currentTime)
 //            val usageEvents = usageStatsManager.queryAndAggregateUsageStats()
             val usageEvent = UsageEvents.Event()
+            val usageStats: UsageStats
 //            while(usageEvents.hasNextEvent()) {
 //                usageEvents.getNextEvent(usageEvent)
 //                Log.i("modelinfo" , "${usageEvent.packageName} & ${usageEvent.timeStamp}" )

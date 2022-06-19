@@ -23,11 +23,14 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.jyotimoykashyap.focus.databinding.ActivityMainBinding
+import com.jyotimoykashyap.focus.util.TimeInterval
+import com.jyotimoykashyap.focus.util.getMilliSeconds
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -49,7 +52,16 @@ class MainActivity : AppCompatActivity() {
             val currentTime = System.currentTimeMillis()
             val usageStatsManager = this.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
             //val usageEvents = usageStatsManager.queryEvents(currentTime - (1000*60*10), currentTime)
-//            val usageEvents = usageStatsManager.queryAndAggregateUsageStats()
+            runOnUiThread {
+                val usageEvents = usageStatsManager
+                    .queryAndAggregateUsageStats(
+                        getMilliSeconds(TimeInterval.DAY),
+                        System.currentTimeMillis()
+                    )
+                for((key, value) in usageEvents) {
+                    Log.i("modelinfo" , "Key: $key, Usage Stats: \nLast time used -> ${value.lastTimeUsed} \nTime visible -> ${value.totalTimeInForeground}")
+                }
+            }
             val usageEvent = UsageEvents.Event()
             val usageStats: UsageStats
 //            while(usageEvents.hasNextEvent()) {
